@@ -1,0 +1,48 @@
+services:
+  postgres:
+    container_name: elevar_db
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: elevar
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5532:5432
+    volumes:
+      - elevar_db:/var/lib/postgresql/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  minio:
+    container_name: elevar_storage
+    image: quay.io/minio/minio
+    environment:
+      MINIO_ROOT_USER: minioserver
+      MINIO_ROOT_PASSWORD: minioserver
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - elevar_storage:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    command: server /data --console-address ":9001"
+
+  minio_config:
+    container_name: elevar_storage_config
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set minio http://minio:9000/ minioserver minioserver;
+      /usr/bin/mc mb --p minio/elevar;
+      exit 0;"
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+volumes:
+  elevar_db:
+    name: elevar_db
+  elevar_storage:
+    name: elevar_storage
