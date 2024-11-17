@@ -1,5 +1,6 @@
 package com.dev.elevar.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class ImagemProduto {
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
+    @JsonBackReference
     private Produto produto;
 
     private String url;

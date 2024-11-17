@@ -45,8 +45,8 @@ public class ImagemProdutoService {
             ImagemProduto imagemProduto  = new ImagemProduto();
             imagemProduto.setProduto(produtoById);
             imagemProduto.setUrl("http://localhost:9000/"+ BUCKET_NAME + "/" + nomeImagemProduto);
-            imagemProduto.setDataUpload(LocalDateTime.now());
             imagemProduto.setNome(nomeImagemProduto);
+            imagemProduto.setDataUpload(LocalDateTime.now());
             return this.imagemProdutoRepository.save(imagemProduto);
         }catch (Exception e){
             throw new RuntimeException(e.getMessage());
