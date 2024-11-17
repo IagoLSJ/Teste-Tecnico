@@ -20,8 +20,12 @@ public class ProdutoService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public List<Produto> findAll() {
-        return produtoRepository.findAll();
+    public List<Produto> findAll(String nome, Double valorMinimo, Double valorMaximo, Boolean status, String categoriaNome) {
+        if(nome == null && valorMinimo == null && valorMaximo == null && status == null && categoriaNome == null) {
+            return produtoRepository.findAll();
+        }else{
+            return produtoRepository.findByFilters(nome, valorMinimo, valorMaximo, status, categoriaNome);
+        }
     }
 
     public Produto findById(Integer id) {

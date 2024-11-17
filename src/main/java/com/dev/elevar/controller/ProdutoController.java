@@ -15,8 +15,14 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping("/")
-    public List<Produto> findAll() {
-        return produtoService.findAll();
+    public List<Produto> findAll(
+            @RequestParam(value = "nome", required = false) String nome,
+            @RequestParam(value = "valorMinimo", required = false) Double valorMinimo,
+            @RequestParam(value = "valorMaximo", required = false) Double valorMaximo,
+            @RequestParam(value = "status", required = false) Boolean status,
+            @RequestParam(value = "categoriaNome", required = false) String categoriaNome
+    ) {
+        return produtoService.findAll(nome, valorMinimo, valorMaximo, status, categoriaNome);
     }
 
     @GetMapping("/id/{id}")
