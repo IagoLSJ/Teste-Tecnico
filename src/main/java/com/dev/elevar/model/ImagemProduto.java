@@ -25,7 +25,7 @@ public class ImagemProduto {
 
     private String url;
 
-    private String descricao;
+    private String nome;
 
     private LocalDateTime dataUpload;
 }
