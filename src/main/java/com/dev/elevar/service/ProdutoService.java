@@ -60,7 +60,7 @@ public class ProdutoService {
             produtoById.setNome(produto.getNome());
         }
 
-        if (produto.getQuantidade() >= 0) {
+        if (produto.getQuantidade() >= 0 && produto.getQuantidade() !=0) {
             produtoById.setQuantidade(produto.getQuantidade());
         }
 

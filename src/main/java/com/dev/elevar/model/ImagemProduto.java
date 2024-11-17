@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class ImagemProduto {
     @Id
     @SequenceGenerator(name = "imagem_produto_id_seq", sequenceName = "imagem_produto_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imagem_produto_id_seq")
     private Integer id;
 
     @ManyToOne
